@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BASIC62 CodeLab</title>
+<meta name="description" content="BASIC62 CodeLab is a browser-based educational programming environment for learning BASIC62, a modern, beginner-friendly language inspired by classic BASIC and designed to provide a progressive pathway to Python.">
+<link rel="icon" type="image/png" href="__ICON__">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/*__CSS__*/
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="appbar">
+    <button class="brand" id="btnBrand" type="button" aria-label="About BASIC62 CodeLab"><img class="logo" src="__LOGO__" alt="BASIC62" width="169" height="32"><img class="icon" src="__ICON__" alt="BASIC62" width="30" height="30"><span class="wordmark">CodeLab</span></button>
+    <input id="projName" class="projname" aria-label="Project name" spellcheck="false">
+    <div class="menus">
+      <button class="btn ghost" id="btnExamples" aria-haspopup="true" data-i18n="examples">Examples</button>
+      <button class="btn ghost" id="btnProject" aria-haspopup="true" data-i18n="project">Project</button>
+    </div>
+    <div class="edition" role="group" aria-label="Language edition">
+      <button class="seg" data-ed="en" aria-pressed="true">EN</button><button class="seg" data-ed="es" aria-pressed="false">ES</button>
+    </div>
+    <div class="runbar">
+      <button class="btn primary" id="btnRun" title="Run (Ctrl+Enter)"><span class="ic">▶</span><span data-i18n="run">Run</span></button>
+      <button class="btn" id="btnStop" title="Stop" disabled><span class="ic">■</span><span data-i18n="stop">Stop</span></button>
+      <button class="btn" id="btnStepTop" title="Step (F10)"><span class="ic">⤼</span><span data-i18n="step">Step</span></button>
+      <button class="btn" id="btnTests" title="Run tests"><span class="ic">✓</span><span data-i18n="runTests">Run tests</span></button>
+    </div>
+    <div id="status" class="status" role="status" aria-live="polite"></div>
+  </header>
+  <main class="work">
+    <section class="editorPane" aria-label="Code editor">
+      <div class="paneHead"><span class="fileTag">main.bl</span><span id="editorInfo" class="muted small"></span></div>
+      <div id="editor" class="editor"></div>
+      <div id="helpBar" class="helpbar" aria-live="polite"></div>
+    </section>
+    <section class="stagePane" aria-label="Program output">
+      <div id="widgets" class="widgets" hidden></div>
+      <div class="canvasWrap off" id="canvasWrap">
+        <canvas id="cv" width="1200" height="800" tabindex="0" aria-label="Drawing canvas"></canvas>
+        <canvas id="cvT" width="1200" height="800" aria-hidden="true"></canvas>
+        <div id="mousePos" class="mousepos" aria-hidden="true"></div>
+      </div>
+      <div class="consoleHead"><span data-i18n="output">Output</span><span class="grow"></span><button class="btn tiny ghost" id="btnCanvas" data-i18n="canvas">Canvas</button><button class="btn tiny ghost" id="btnClearOut" data-i18n="clear">Clear</button></div>
+      <div id="console" class="console" tabindex="0" aria-label="Output"></div>
+    </section>
+  </main>
+  <section class="dock" id="dock">
+    <div class="tabs" role="tablist" aria-label="Tools">
+      <button role="tab" data-tab="debug" aria-selected="true" data-i18n="tDebug">Debug</button>
+      <button role="tab" data-tab="tests" aria-selected="false" data-i18n="tTests">Tests</button>
+      <button role="tab" data-tab="docs" aria-selected="false" data-i18n="tDocs">Docs &amp; credits</button>
+      <button role="tab" data-tab="history" aria-selected="false" data-i18n="tHistory">History</button>
+      <button role="tab" data-tab="python" aria-selected="false" data-i18n="tPython">Python</button>
+      <button role="tab" data-tab="files" aria-selected="false" data-i18n="tFiles">Files</button>
+      <button role="tab" data-tab="reference" aria-selected="false" data-i18n="tReference">Reference</button>
+      <span class="grow"></span>
+      <button class="btn tiny ghost" id="btnDock" aria-label="Resize tool panel">⇕</button>
+    </div>
+    <div class="tabBody" id="tab-debug" role="tabpanel"></div>
+    <div class="tabBody" id="tab-tests" role="tabpanel" hidden></div>
+    <div class="tabBody" id="tab-docs" role="tabpanel" hidden></div>
+    <div class="tabBody" id="tab-history" role="tabpanel" hidden></div>
+    <div class="tabBody" id="tab-python" role="tabpanel" hidden></div>
+    <div class="tabBody" id="tab-files" role="tabpanel" hidden></div>
+    <div class="tabBody" id="tab-reference" role="tabpanel" hidden></div>
+  </section>
+  <footer class="credits" id="credits">
+    <span><b>BASIC62 CodeLab</b> | <span data-i18n="ftLang">Learn BASIC62, a pathway to Python</span></span>
+    <span><span data-i18n="ftConcept">Concept &amp; language design</span>: Andreas Tsouchlaris | <span data-i18n="ftSupported">Supported by</span> <a href="https://binarylogic.net" target="_blank" rel="noopener">Binary Logic</a> | <span data-i18n="ftBuilt">Built with</span> Claude (Anthropic) | <span data-i18n="ftMit">MIT License</span> | <button class="linkbtn" id="btnAboutFoot" type="button" data-i18n="about">About</button></span>
+  </footer>
+  <div id="menu" class="menu" hidden role="menu"></div>
+  <div id="modal" class="modalBack" hidden><div class="modal" role="dialog" aria-modal="true"><div id="modalBody"></div></div></div>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</div>
+<script>
+/*__CORE__*/
+</script>
+<script>
+/*__UI__*/
+</script>
+</body>
+</html>

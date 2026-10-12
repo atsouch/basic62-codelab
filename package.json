@@ -1,0 +1,28 @@
+{
+  "name": "basic62-codelab",
+  "version": "0.1.0",
+  "description": "BASIC62 CodeLab is a browser-based educational programming environment for learning BASIC62, a modern, beginner-friendly language inspired by classic BASIC and designed to provide a progressive pathway to Python.",
+  "private": true,
+  "scripts": {
+    "build": "python3 build.py",
+    "test": "python3 build.py && node test/core.test.js",
+    "test:e2e": "python3 build.py && python3 test/e2e_smoke.py",
+    "reference": "python3 build.py && node tools/gen_reference.js"
+  },
+  "keywords": [
+    "education",
+    "programming-language",
+    "basic",
+    "python",
+    "computer-science",
+    "k-12",
+    "interpreter",
+    "debugger"
+  ],
+  "author": "Andreas Tsouchlaris (original concept, BASIC62 language design and educational direction)",
+  "contributors": [
+    "Claude (Anthropic), AI-assisted software implementation"
+  ],
+  "homepage": "https://binarylogic.net",
+  "license": "MIT"
+}
